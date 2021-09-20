@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<style>
+	#gallery{
+		width:3000px;
+		height:150px;
+		font-size:0px;
+		position : absolute;
+	}
+	
+	#gallery img{
+		margin:0px;
+		padding:0px;
+		display: inline-block;
+	}
+
+	#carousal{
+		left : 100px;
+		width:300px;
+		height:150px;
+		overflow:hidden;
+		position : relative;
+
+	}
+</style>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div>
+<img id= 'imgHolder' src = "https://via.placeholder.com/600/b0f7cc"></img>
+</div>
+	<div id='carousal'>
+
+		<div id="gallery"></div>
+
+	</div>
+	<div>
+		<button id ='prev'>Prev</button>
+		<button id ='next'>Next</button>
+	</div>
+  <script>
+	let crsl = document.querySelector('#gallery');
+	
+	fetch('https://jsonplaceholder.typicode.com/photos/7').then(resp => resp.json()).then(x =>{
+ 	   let thmb = document.createElement('img');
+ 	   thmb.src = x.thumbnailUrl;
+	   thmb.dataset.url = x.url;
+	   crsl.append(thmb);
+	});
+	fetch('https://jsonplaceholder.typicode.com/photos/8').then(resp => resp.json()).then(x =>{
+ 	   let thmb = document.createElement('img');
+ 	   thmb.src = x.thumbnailUrl;
+	   thmb.dataset.url = x.url;
+	   crsl.append(thmb);
+	});
+	fetch('https://jsonplaceholder.typicode.com/photos/9').then(resp => resp.json()).then(x =>{
+ 	   let thmb = document.createElement('img');
+ 	   thmb.src = x.thumbnailUrl;
+	   thmb.dataset.url = x.url;
+	   crsl.append(thmb);
+	});
+
+	fetch('https://jsonplaceholder.typicode.com/photos/4').then(resp => resp.json()).then(x =>{
+ 	   let thmb = document.createElement('img');
+ 	   thmb.src = x.thumbnailUrl;
+	   thmb.dataset.url = x.url;
+	   crsl.append(thmb);
+	});
+	fetch('https://jsonplaceholder.typicode.com/photos/5').then(resp => resp.json()).then(x =>{
+ 	   let thmb = document.createElement('img');
+ 	   thmb.src = x.thumbnailUrl;
+	   thmb.dataset.url = x.url;
+	   crsl.append(thmb);
+	});
+	fetch('https://jsonplaceholder.typicode.com/photos/6').then(resp => resp.json()).then(x =>{
+ 	   let thmb = document.createElement('img');
+ 	   thmb.src = x.thumbnailUrl;
+	   thmb.dataset.url = x.url;
+	   crsl.append(thmb);
+	});
+
+	let next = document.querySelector('#next');
+	let prev = document.querySelector('#prev');
+	let g = document.querySelector('#gallery');
+	let xOrg = g.getBoundingClientRect().left;
+
+	next.addEventListener('click', function(event){
+		g.style.left = (g.offsetLeft - 150 < -600 ? -600 : g.offsetLeft - 150) + 'px';
+	});
+
+	prev.addEventListener('click', function(event){
+		g.style.left = (g.offsetLeft + 150 > 0 ? 0 : g.offsetLeft + 150)  + 'px';
+	});
+
+	carousal.onclick = function(event){
+		if(event.target.tagName = "IMG"){
+			console.log(event.target.dataset.url);
+			imgHolder.src = event.target.dataset.url
+		}
+	}
+  </script>
+
+</body>
+</html>
